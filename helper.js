@@ -16,5 +16,15 @@ module.exports = {
             day = '0' + day;
 
         return [year, month, day].join('-');
-    }
+    },
+    chunkArray:function(myArray, chunk_size){
+        let index = 0,arrayLength = myArray.length,tempArray = [];        
+        for (index = 0; index < arrayLength; index += chunk_size) {
+            myChunk = myArray.slice(index, index+chunk_size);
+            // Do something if you want with the group
+            tempArray.push(myChunk);
+        }
+    
+        return tempArray;
+    }    
 }

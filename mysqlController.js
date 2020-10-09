@@ -1,4 +1,5 @@
 `use strict`
+const helper = require("./helper");
 const { queries } = require("./mysql_strings");
 let mysqlStrings = require("./mysql_strings");
 
@@ -23,23 +24,21 @@ module.exports = {
             });
         })
     },
-    insertIntoUsersLogs(userLogs) {  
+    insertIntoUsersLogs(appLogs) {          
         let perChunk = 1;
-        let fullQuery;
-        let iterations=(userLogs.length/perChunk),iteration=1;
-        if(iterations==0) iterations=1;      
-                
-        let queryArray=[];
+        let fullQuery;        
+        let usersLogsAarray=helper.chunkArray(appLogs,perChunk);
+        usersLogsAarray.map(userLogs=>{       
         let insertIntoUsersLogs="INSERT IGNORE INTO `user_logs`(`id`,`app_id`,`uts`,`sent`,`uid`,`auth_token`,`resource`,`v`,`app_info`,`sid`,`origin`,`version`,`platform`,`os_version`,`user_agent`,`api_version`,`build_number`,`date`,`year`,`month`,`day`,`hour`) VALUES";
         userLogs.map((userLog,index)=>{
             console.log({index});
             userLog=JSON.parse(userLog);
             let user={};
             if (userLog.hasOwnProperty('headers')) {
-                let headers=userLog.headers;
-                user.app_id=headers.app_id;         
-                if(headers.authToken)user.auth_token=headers.authToken;
-       
+                let headers=userLog.headers;                
+                user.app_id=headers.app_id;                         
+                if(headers.authtoken) user.auth_token=headers.authtoken;       
+                console.log(user,"-------->");
             }
             if (userLog.hasOwnProperty('body')) {
                 let body=userLog.body;
@@ -86,18 +85,25 @@ module.exports = {
             
             let sqlValues=`(UUID(),'${user.app_id}','${user.uts}','${user.sent}','${user.uid?user.uid:''}','${user.auth_token?user.auth_token:''}','${user.resource?user.resource:''}','1','${user.app_info?user.app_info:null}','${user.sid?user.sid:null}','${user.origin?user.origin:null}','${user.version?user.version:null}','${user.platform?user.platform:null}','${user.os_version?user.os_version:null}','${user.user_agent?user.user_agent:null}','${user.api_version?user.api_version:null}','${user.build_number?user.build_number:null}','${user.date?user.date:null}','${user.year?user.year:null}','${user.month?user.month:null}','${user.day?user.day:null}','${user.hour?user.hour:null}')`;
             
-            // if(index==0||index==(perChunk*iteration)){                
-                if(index==0){   
+            if(index==0){   
                 fullQuery=insertIntoUsersLogs+sqlValues;
             }else {                
                 fullQuery=fullQuery+","+sqlValues;
+                
             }
-            
-            if(index==((perChunk*iteration)-1)){                
-                queryArray.push(fullQuery);
-                fullQuery=undefined;
-            }
-        });        
-        console.log(queryArray);        
+        });          
+        logsPool.getConnection(function (err, connection) {
+            if (err) throw err;
+            connection.query(fullQuery, function (error, result) {
+                connection.release();
+                if (error) {
+                    console.log(error);
+                }else{
+                    console.log(result);
+                }
+            });
+        });
+    });  
+        
     }
 }
