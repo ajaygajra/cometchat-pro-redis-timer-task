@@ -1,0 +1,25 @@
+{
+    "logs_mysql_config": {
+      "connectionLimit": 3,
+      "host": "3.23.129.28",
+      "user": "logs",
+      "password": "Password@123",
+      "port": "3306",
+      "database": "users-logging",
+      "connectTimeout": 3600000,
+      "acquireTimeout": 3600000,
+      "timeout": 3600000
+    },
+    "logs_redis_config": {
+      "host": "dev-server.tn8kjp.ng.0001.aps1.cache.amazonaws.com"
+    },
+    "chat_server_auth":{
+      "basic":{
+        "username":"username",
+        "password":"password",
+        "string":"randommd5string"
+      }
+    },
+    "redis_flush_time":5000
+  }
+  
