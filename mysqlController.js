@@ -93,10 +93,10 @@ module.exports = {
                 fullQuery=fullQuery+","+sqlValues;
             }
             
-            // if(index==((perChunk*iteration)-1)){                
-            //     queryArray.push(fullQuery);
-            //     fullQuery=undefined;
-            // }
+            if(index==((perChunk*iteration)-1)){                
+                queryArray.push(fullQuery);
+                fullQuery=undefined;
+            }
         });        
         console.log(queryArray);        
     }
