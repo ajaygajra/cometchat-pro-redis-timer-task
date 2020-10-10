@@ -3,8 +3,8 @@ module.exports = {
         createUserLogs: "CREATE TABLE IF NOT EXISTS `user_logs` ("+
             "`id` varchar(255) NOT NULL,"+
             "`app_id` varchar(255) NOT NULL,"+
-            "`uts` timestamp,"+
-            "`sent` timestamp,"+
+            "`uts` BIGINT,"+
+            "`sent` BIGINT,"+
             "`uid` varchar(50) NOT NULL,"+
             "`auth_token` varchar(255) DEFAULT NULL,"+
             "`resource` varchar(255) DEFAULT NULL,"+
@@ -49,8 +49,8 @@ module.exports = {
         concurrentUsersCountTable:"CREATE TABLE IF NOT EXISTS `concurrent_user_count` ("+
             "`id` varchar(255) NOT NULL,"+
                 "`app_id` varchar(255) NOT NULL,"+
-                "`uts` timestamp ,"+
-                "`sent` timestamp ,"+
+                "`uts` BIGINT ,"+
+                "`sent` BIGINT ,"+
                 "`date` varchar(50) DEFAULT NULL,"+
                 "`year` smallint DEFAULT NULL,"+
                 "`month` smallint DEFAULT NULL,"+

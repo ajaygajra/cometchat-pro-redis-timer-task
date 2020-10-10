@@ -20,6 +20,6 @@
         "string":"randommd5string"
       }
     },
-    "redis_flush_time":5000
+    "redis_flush_time":180000
   }
   

@@ -17,14 +17,30 @@ module.exports = {
 
         return [year, month, day].join('-');
     },
-    chunkArray:function(myArray, chunk_size){
-        let index = 0,arrayLength = myArray.length,tempArray = [];        
+    chunkArray: function (myArray, chunk_size) {
+        let index = 0,
+            arrayLength = myArray.length,
+            tempArray = [];
         for (index = 0; index < arrayLength; index += chunk_size) {
-            myChunk = myArray.slice(index, index+chunk_size);
+            myChunk = myArray.slice(index, index + chunk_size);
             // Do something if you want with the group
             tempArray.push(myChunk);
         }
-    
+
         return tempArray;
-    }    
+    },
+    explodeOnlineUsersKey: (key) => {
+        tempAtrraykey=key.split("_");
+        if(tempAtrraykey.length==3)
+        return{
+            "app_id": tempAtrraykey[0],
+            "timestamp": tempAtrraykey[2]
+        };
+        else{
+            return {
+                app_id:'unknow',
+                timestamp:new Date().getTime()
+            }
+        }
+    }
 }
