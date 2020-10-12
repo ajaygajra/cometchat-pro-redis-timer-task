@@ -80,16 +80,16 @@ module.exports = {
                 userLogs.map((userLog, index) => {              
                     userLog = JSON.parse(userLog);
                     let user = {};
+                    user.app_info = JSON.stringify(userLog);
                     if (userLog.hasOwnProperty('headers')) {
                         let headers = userLog.headers;
-                        user.app_id = headers.app_id;
+                        user.app_id = headers.appid;
                         if (headers.authtoken) user.auth_token = headers.authtoken;
                     }
                     if (userLog.hasOwnProperty('body')) {
                         let body = userLog.body;
                         if (body.hasOwnProperty('appInfo')) {
-                            let appInfo = body.appInfo;
-                            user.app_info = JSON.stringify(appInfo);
+                            let appInfo = body.appInfo;                            
                             if (appInfo.uts) user.uts = appInfo.uts;
                             if (appInfo.uts) user.sent = appInfo.uts;
                             if (appInfo.authToken) user.auth_token = appInfo.authToken;

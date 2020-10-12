@@ -59,7 +59,7 @@ module.exports = {
                 "`minute` smallint DEFAULT NULL,"+
                 "`users_count` bigint,"+
                 "key(`app_id`),key(`date`),key(`sent`),key(`uts`),key(`year`),key(`users_count`),"+
-                "key `year_month`(`year`,`month`),key`app_id_date`(`app_id`,`date`),"+
+                "key `year_month`(`year`,`month`),key`app_id_date`(`app_id`,`date`),key`app_id_year`(`app_id`,`year`),key`app_id_month`(`app_id`,`month`),"+
                 "key `app_id_sent`(`app_id`,`sent`),key`app_id_uts`(`app_id`,`uts`),"+
                 "key `year_month_hour`(`year`,`month`,`hour`),key `app_id_year_month`(`app_id`,`year`,`month`),key `app_id_year_month_day`(`app_id`,`year`,`month`,`day`),key `app_id_year_month_day_hour`(`app_id`,`year`,`month`,`day`,`hour`),key `app_id_year_month_day_hour_minute`(`app_id`,`year`,`month`,`day`,`hour`,`minute`),"+
                 "key `app_id_year_month_hour`(`app_id`,`year`,`month`,`hour`), "+
