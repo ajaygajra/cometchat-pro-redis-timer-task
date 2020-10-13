@@ -45,6 +45,8 @@ module.exports = {
             "KEY `app_id_uid_resource` (`app_id`,`uid`,`resource`),"+
             "KEY `app_id_resource_auth_token` (`app_id`,`resource`,`auth_token`),"+
             "KEY `year_month_day_hour` (`year`,`month`,`day`,`hour`),"+
+            "KEY `uts_year_month_day_hour` (`uts`,`year`,`month`,`day`,`hour`),"+
+            "KEY `app_id_uts_year_month_day_hour` (`app_id`,`uts`,`year`,`month`,`day`,`hour`),"+
             "UNIQUE (`app_id`,`resource`,`auth_token`,`year`,`month`,`day`,`hour`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;",
         concurrentUsersCountTable:"CREATE TABLE IF NOT EXISTS `concurrent_user_count` ("+
             "`id` varchar(255) NOT NULL,"+
